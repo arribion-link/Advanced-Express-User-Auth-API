@@ -2,9 +2,12 @@ import express from 'express';
 const authRouter = express.Router();
 
 // Import controller functions
-import  { login, register } from '../controllers/auth.Controller.js';
+import { login, register } from '../controllers/auth.Controller.js';
 
-authRouter.post('/login', login);
-authRouter.post('/register', register);
+// middleware
+import userValidator from '../middlewares/user.Validation.js';
+
+authRouter.post('/login', userValidator  ,login);
+authRouter.post('/register', userValidator, register);
 
 export default authRouter;
